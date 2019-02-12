@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 
-import Header from './components/Header/Header';
-import HeaderSelect from './components/SelectLanguage/HeaderSelect';
-import FooterSelect from './components/SelectLanguage/FooterSelect';
+import Header from '../components/Header/Header';
+import HeaderSelect from '../components/SelectLanguage/HeaderSelect';
+import FooterSelect from '../components/SelectLanguage/FooterSelect';
 
 const SelectLanguageContainer = styled.View`
     background-color: #ffffff;

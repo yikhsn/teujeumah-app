@@ -14,6 +14,9 @@ const SelectContainer = styled.View`
     
     border-color: #eeeeee;
     border-bottom-width: 2;
+
+    justify-content: center;
+    align-items: center;
 `;
 
 export default Select = (props) => {

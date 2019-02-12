@@ -1,11 +1,8 @@
-/**
- * @format
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import {AppRegistry} from 'react-native';
-import App from './screen/App';
-import SelectLanguage from './screen/SelectLanguage';
 import {name as appName} from './app.json';
+
+// screen
+import App from './src/screens/Main';
+import SelectLanguage from './src/screens/SelectLanguage';
 
 AppRegistry.registerComponent(appName, () => App);
