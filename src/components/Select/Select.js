@@ -1,6 +1,7 @@
 import React from 'react';
-import {Text, View} from 'react-native';
 import styled from 'styled-components/native';
+
+import capitalize_words from '../../helpers/capitalize_words';
 
 import ToggleButton from './ToggleButton';
 import SelectButton from './SelectButton';
@@ -20,13 +21,27 @@ const SelectContainer = styled.View`
 `;
 
 export default Select = (props) => {
+    const { translateFrom, translateTo } = props.datas;
+
     return(
         <SelectContainer>
+
             <SelectButton 
-                language='Aceh' />
-            <ToggleButton />
+                language={ capitalize_words(translateFrom) }
+                navigation={ props.navigation }
+                typeSelect='setTranslateTo' />
+            
+            <ToggleButton 
+                datas={props.datas} 
+                setTranslateTo= {props.setTranslateTo}
+                setTranslateFrom= {props.setTranslateFrom}
+                />
+            
             <SelectButton 
-                language='Indonesia' />
+                language={ capitalize_words(translateTo) }
+                navigation={ props.navigation }
+                typeSelect='setTranslateFrom' />
+
         </SelectContainer>
     )
 }

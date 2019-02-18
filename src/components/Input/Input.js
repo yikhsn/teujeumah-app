@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components/native';
 
 
@@ -24,18 +24,25 @@ const StyledTextInput = styled.TextInput`
     padding-right: 10;
 `;
 
-export default Input = (props) => {
-    return(
-        <StyledInputContainer>
-            <StyledTextInput 
-                onChangeText={(words) => props.inputChanged(words) }
-                value={ props.words }
-                multiline={true}
-                autoCorrect={false}
-                autoFocus={false}
-                returnKeytype='done'
-                // onSubmitEditing={ Keyboard.dismiss() }
-            />
-        </StyledInputContainer>
-    )
+export default class Input extends Component {
+    
+    // shouldComponentUpdate(){
+    //     return false;
+    // }
+    
+    render(){
+        return(
+            <StyledInputContainer>
+                <StyledTextInput 
+                    onChangeText={(words) => this.props.inputChanged(words) }
+                    value={ this.props.words }
+                    multiline={true}
+                    autoCorrect={false}
+                    autoFocus={false}
+                    returnKeytype='done'
+                    // onSubmitEditing={ Keyboard.dismiss() }
+                />
+            </StyledInputContainer>
+        )
+    }
 }

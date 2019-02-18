@@ -22,9 +22,18 @@ const StyledTextButton = styled.Text`
 `;
 
 export default SelectButton = (props) => {
+
+    console.log(props);
+
     return(
-        <StyledSelectButton>
-            <StyledTextButton>{props.language}</StyledTextButton>
+        <StyledSelectButton
+            onPress={ () => props.navigation.navigate('SelectLanguage', {
+                type: props.typeSelect
+            })}
+        >
+            <StyledTextButton>
+                { props.language }
+            </StyledTextButton>
             <Image 
                 source={require('../../img/down-arrow-green.png')}
                 style={{

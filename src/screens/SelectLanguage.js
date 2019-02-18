@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { ScrollView, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 
-import Header from '../components/Header/Header';
+import capitalize_words from '../helpers/capitalize_words';
+
 import HeaderSelect from '../components/SelectLanguage/HeaderSelect';
 import FooterSelect from '../components/SelectLanguage/FooterSelect';
 
 const SelectLanguageContainer = styled.View`
     background-color: #ffffff;
+    flex: 2;
 `;
 
 const ListLanguage = styled.TouchableOpacity`
@@ -25,20 +27,44 @@ const ListText = styled.Text`
 `;
 
 export default class SelectLanguage extends Component {
+    
+    static navigationOptions = {
+        title: 'Terjemahkan dari',
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#08b586',
+            }
+        }
+    }
+
+    onLanguageChanged = language => {
+
+        // get type changed pass by route navigation
+        // ('setTranslateTo' or 'setTranslateFrom')
+        const {typeChanged} = this.props.navigation.getParam('type', 'setTranslateTo');
+
+        if (typeChanged === 'setTranslateTo') this.props.screenProps.setTranslateTo(language);
+    
+        else if (typeChanged === 'setTranslateFrom') this.props.screenProps.setTranslateFrom(language);
+
+        this.props.navigation.navigate('Main');
+    };
+
     render() {
         return(
-            <View>
-                <Header />
+            <ScrollView>
                 <SelectLanguageContainer>
                     <FlatList
-                        data={[
-                            { id: 1, language: 'Indonesia' },
-                            { id: 2, language: 'Aceh' }
-                        ]}
+                        style={{ flex: 1 }}
+                        data={this.props.screenProps.datas.language}
                         renderItem={ ({ item }) => {
                             return(
-                                <ListLanguage>
-                                    <ListText>{item.language}</ListText>
+                                <ListLanguage
+                                    onPress={ () => this.onLanguageChanged(item.language)}
+                                >
+                                    <ListText>
+                                        {capitalize_words(item.language)}
+                                    </ListText>
                                 </ListLanguage> 
                             )
                         }} 
@@ -47,7 +73,7 @@ export default class SelectLanguage extends Component {
                         ListFooterComponent={ () => <FooterSelect />}
                         />
                 </SelectLanguageContainer>
-            </View>
+            </ScrollView>
         )
     }
 }
