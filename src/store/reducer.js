@@ -1,12 +1,19 @@
 import * as actionTypes from './actions';
+import { combineReducers } from 'redux';
 
 const initialState = {
     words: '',
-    translations: [],
-    type: []
+    translation: [],
+    type: [],
+    language: [
+        { id: 1, language: 'aceh' },
+        { id: 2, language: 'indonesia' }
+    ],
+    translateFrom: 'aceh',
+    translateTo: 'indonesia'
 }
 
-const reducer = ( state = initialState, action) => {
+const mainReducer = (state = initialState, action) => {
     switch(action.type){
 
         case actionTypes.SET_DATA:
@@ -29,4 +36,6 @@ const reducer = ( state = initialState, action) => {
     }
 };
 
-export default reducer;
+export default combineReducers({
+    mainReducer: mainReducer,
+});

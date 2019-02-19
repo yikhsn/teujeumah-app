@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
-import reducer from './store/reducer';
+import mainReducer from './store/reducer';
 import * as actionTypes from './store/actions';
-
 import AppNavigator from './AppNavigator';
+
+const store = createStore(mainReducer);
 
 export default class App extends Component{
     state = {
@@ -26,8 +26,8 @@ export default class App extends Component{
         translation: [],
         type: [],
         language: [
-            { id: 1, language: 'Indonesia' },
-            { id: 2, language: 'Aceh' }
+            { id: 1, language: 'indonesia' },
+            { id: 2, language: 'aceh' }
         ],
         translateFrom: 'aceh',
         translateTo: 'indonesia'
@@ -119,7 +119,7 @@ export default class App extends Component{
     
     render(){
         return(
-            // <Provider store={store}>
+            <Provider store={store}>
                 <AppNavigator
                     screenProps={{
                         datas: this.state,
@@ -128,7 +128,7 @@ export default class App extends Component{
                         setTranslateFrom: this.setTranslateFrom
                     }}
                 />
-            /* </Provider> */
+            </Provider>
         )
     }
 }

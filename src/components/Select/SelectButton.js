@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Text, View, Image } from 'react-native';
+import { Image } from 'react-native';
 
 const StyledSelectButton = styled.TouchableOpacity`
     height: null;
@@ -22,9 +22,6 @@ const StyledTextButton = styled.Text`
 `;
 
 export default SelectButton = (props) => {
-
-    console.log(props);
-
     return(
         <StyledSelectButton
             onPress={ () => props.navigation.navigate('SelectLanguage', {

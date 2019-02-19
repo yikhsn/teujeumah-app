@@ -41,7 +41,9 @@ export default class SelectLanguage extends Component {
 
         // get type changed pass by route navigation
         // ('setTranslateTo' or 'setTranslateFrom')
-        const {typeChanged} = this.props.navigation.getParam('type', 'setTranslateTo');
+        const typeChanged = this.props.navigation.getParam('type', 'nggak di dapat');
+
+        console.log(typeChanged);
 
         if (typeChanged === 'setTranslateTo') this.props.screenProps.setTranslateTo(language);
     
