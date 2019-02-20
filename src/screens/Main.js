@@ -1,44 +1,43 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import Select from '../components/Select/Select';
 import Input from '../components/Input/Input';
 import Translation from '../components/Translations/Translation/Translation';
 import Definition from '../components/Translations/Definition/Definition';
 import Output from '../components/Output/Output';
 
-export default class Main extends Component {
+class Main extends Component {
 
     static navigationOptions = {
         title: 'Teujeumah',
-    } 
-    
+    }
+
     render(){
         return(
             <ScrollView>
                 <Select
                     navigation={ this.props.navigation }
-                    datas={ this.props.screenProps.datas }
-                    setTranslateTo = {this.props.screenProps.setTranslateTo}
-                    setTranslateFrom = {this.props.screenProps.setTranslateFrom}
+                    datas={ this.props.datas }
                     />
           
                 <Input
-                    inputChanged={ this.props.screenProps.inputChanged }
-                    words={ this.props.screenProps.datas.words }
+                    inputChanged={ this.inputChanged }
                     />
           
-                <Output data={ this.props.screenProps.datas } />
+                <Output data={ this.props.datas } />
           
                 { 
-                    this.props.screenProps.datas.type.length > 0 
-                        ? <Translation datas={ this.props.screenProps.datas } /> 
+                    this.props.datas.type.length > 0 
+                        ? <Translation datas={ this.props.datas } /> 
                         : null 
                 }
 
                 { 
-                    this.props.screenProps.datas.type.length > 0 
-                        ? this.props.screenProps.datas.type.map( (cur, index) => {
+                    this.props.datas.type.length > 0 
+                        ? this.props.datas.type.map( (cur, index) => {
                             return <Definition key={index} datas={ cur } /> 
                         })
                         : null
@@ -47,3 +46,11 @@ export default class Main extends Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        datas: state
+    }
+}
+
+export default connect(mapStateToProps)(Main);

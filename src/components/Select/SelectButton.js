@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Image } from 'react-native';
 
+import { connect } from 'react-redux';
+import * as actionTypes from '../../store/actionsTypes';
+
 const StyledSelectButton = styled.TouchableOpacity`
     height: null;
     width: null;

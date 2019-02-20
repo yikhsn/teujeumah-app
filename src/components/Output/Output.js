@@ -22,9 +22,8 @@ const TextTranslation = styled.Text`
     padding-bottom: 15;
 `;
 
-
 export default Translation = (props) => {
-    
+        
     const translation = props.data.translation.length > 0
                             ? props.data.translation.join(' ')
                             : props.data.words;

@@ -31,11 +31,7 @@ export default Select = (props) => {
                 navigation={ props.navigation }
                 typeSelect='setTranslateFrom' />
             
-            <ToggleButton 
-                datas={props.datas} 
-                setTranslateTo= {props.setTranslateTo}
-                setTranslateFrom= {props.setTranslateFrom}
-                />
+            <ToggleButton />
             
             <SelectButton 
                 language={ capitalize_words(translateTo) }

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { ScrollView, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 
+import * as actionCreators from '../store/actionCreator';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import capitalize_words from '../helpers/capitalize_words';
 
 import HeaderSelect from '../components/SelectLanguage/HeaderSelect';
@@ -26,7 +30,7 @@ const ListText = styled.Text`
     align-items: center;
 `;
 
-export default class SelectLanguage extends Component {
+class SelectLanguage extends Component {
     
     static navigationOptions = {
         title: 'Terjemahkan dari',
@@ -39,16 +43,13 @@ export default class SelectLanguage extends Component {
 
     onLanguageChanged = language => {
 
-        // get type changed pass by route navigation
-        // ('setTranslateTo' or 'setTranslateFrom')
-        const typeChanged = this.props.navigation.getParam('type', 'nggak di dapat');
+        // get type changed ('setTranslateTo' or 'setTranslateFrom')
+        const typeChanged = this.props.navigation.getParam('type', null);
 
-        console.log(typeChanged);
+        // set language choosen based on 'typeChanged' pass by navigation
+        this.props[typeChanged](language);
 
-        if (typeChanged === 'setTranslateTo') this.props.screenProps.setTranslateTo(language);
-    
-        else if (typeChanged === 'setTranslateFrom') this.props.screenProps.setTranslateFrom(language);
-
+        // navigate to main screen
         this.props.navigation.navigate('Main');
     };
 
@@ -58,12 +59,12 @@ export default class SelectLanguage extends Component {
                 <SelectLanguageContainer>
                     <FlatList
                         style={{ flex: 1 }}
-                        data={this.props.screenProps.datas.language}
+                        data={this.props.language}
                         renderItem={ ({ item }) => {
                             return(
                                 <ListLanguage
                                     onPress={ () => this.onLanguageChanged(item.language)}
-                                >
+                                    >
                                     <ListText>
                                         {capitalize_words(item.language)}
                                     </ListText>
@@ -79,3 +80,15 @@ export default class SelectLanguage extends Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        language: state.language
+    }
+}
+
+const mapDispatchToProps = dispatch => (
+    bindActionCreators(actionCreators, dispatch)
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectLanguage);

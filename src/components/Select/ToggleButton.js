@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { View, Image } from 'react-native';
 import styled from 'styled-components/native';
 
+import * as setTranslateActionCreators from '../../store/actionCreator';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 const StyledToggleButton = styled.TouchableOpacity`
     flex: 2;
 
@@ -9,7 +13,7 @@ const StyledToggleButton = styled.TouchableOpacity`
     align-items: center;
 `;
 
-export default class ToggleButton extends Component {
+class ToggleButton extends Component {
     onToggleHandler = (from, to) => {
         this.props.setTranslateTo(from);
         this.props.setTranslateFrom(to);
@@ -35,3 +39,15 @@ export default class ToggleButton extends Component {
         )   
     }
 };
+
+const mapStateToProps = state => {
+    return{
+        datas: state
+    }
+}
+
+const mapDispatchToProps = dispatch => (
+    bindActionCreators(setTranslateActionCreators, dispatch)
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleButton);

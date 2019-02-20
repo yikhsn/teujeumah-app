@@ -1,4 +1,4 @@
-import * as actionTypes from './actions';
+import * as actionTypes from './actionsTypes';
 import { combineReducers } from 'redux';
 
 const initialState = {
@@ -13,22 +13,49 @@ const initialState = {
     translateTo: 'indonesia'
 }
 
-const mainReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
     switch(action.type){
 
-        case actionTypes.SET_DATA:
+        case actionTypes.SET_WORDS:
             return {
-
+                ...state,
+                words: action.words
             };
 
-        case actionTypes.SET_TRANSLATION:
-            return {
+        case actionTypes.SET_TRANSLATIONS:
 
+            const translation = [...state.translation];
+            translation.push(action.translation);
+            
+            return {
+                ...state,
+                translation: translation
+            };
+
+
+        case actionTypes.SET_TRANSLATION:
+
+            return {
+                ...state,
+                translation: [ action.translation ]
             };
 
         case actionTypes.SET_ALL_DATA:
             return {
+                ...state,
+                type: action.data
+            };
 
+        case actionTypes.SET_TRANSLATE_TO:
+            return {
+                ...state,
+                translateTo: action.language
+            };
+
+        case actionTypes.SET_TRANSLATE_FROM:
+            return {
+                ...state,
+                translateFrom: action.language
             };
 
         default:
@@ -36,6 +63,4 @@ const mainReducer = (state = initialState, action) => {
     }
 };
 
-export default combineReducers({
-    mainReducer: mainReducer,
-});
+export default reducer;
