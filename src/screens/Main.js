@@ -10,7 +10,6 @@ import Definition from '../components/Translations/Definition/Definition';
 import Output from '../components/Output/Output';
 
 class Main extends Component {
-
     static navigationOptions = {
         title: 'Teujeumah',
     }
@@ -21,14 +20,14 @@ class Main extends Component {
                 <Select
                     navigation={ this.props.navigation }
                     datas={ this.props.datas }
-                    />
-          
+                />
+
                 <Input
                     inputChanged={ this.inputChanged }
-                    />
-          
+                />
+
                 <Output data={ this.props.datas } />
-          
+                
                 { 
                     this.props.datas.type.length > 0 
                         ? <Translation datas={ this.props.datas } /> 

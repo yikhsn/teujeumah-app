@@ -1,7 +1,5 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-import CustomHeader from './components/Header/Header';
-
 import Main from './screens/Main';
 import SelectLanguage from './screens/SelectLanguage';
 
@@ -11,7 +9,13 @@ const AppNavigator = createStackNavigator(
             screen: Main,
         },
         SelectLanguage: {
-            screen: SelectLanguage
+            screen: SelectLanguage,
+            navigationOptions: {
+                headerTitleStyle: {
+                    fontWeight: '500',
+                    fontSize: 18
+                },
+            }
         },
     },
     {
@@ -24,7 +28,7 @@ const AppNavigator = createStackNavigator(
             headerTintColor: '#ffffff',
             headerTitleStyle: {
                 color: '#ffffff',
-                fontWeight: 'bold',
+                fontWeight: '500',
                 fontSize: 20
             },
         }

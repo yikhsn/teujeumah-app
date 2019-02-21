@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const StyledOutputContainer = styled.View`
-    margin-top: 10;
+    margin-bottom: 10;
     padding-left: 10;
     padding-right: 10;
 `;
@@ -20,7 +20,7 @@ const StyledOutput = styled.View`
     padding-right: 15;
 `;
 
-export default Translation = (props) => {    
+export default Translation = (props) => {
     return(
         <StyledOutputContainer>
             <StyledOutput>

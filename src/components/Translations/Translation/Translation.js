@@ -17,9 +17,13 @@ export default Translation = (props) => {
     
     return(
         <Container>
-            <Title titleName="Terjemahan lain" words={words} />
-            
+            <Title 
+                titleName="Terjemahan lain"
+                words={words}
+            />
+
             { renderTranslation }
+            
         </Container>                
     )
 }

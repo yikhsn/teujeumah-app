@@ -4,20 +4,22 @@ import styled from 'styled-components/native';
 import capitalize_words from './../../helpers/capitalize_words';
 
 const OutputContentContainer = styled.View`
-    margin-bottom: 10;
+    padding-bottom: 5;
+    padding-top: 5;
 `;
 
 const OutputContentTitle = styled.Text`
     color: #08b586;
     font-size: 16;
     font-weight: 500;
-    margin-bottom: 5;
+    margin-bottom: 3;
 `;
 
 const OutputContent = styled.Text`
     color: #444444;
     font-size: 17;
-    margin-bottom: 5;
+    padding-top: 2;
+    padding-bottom: 2;
 `;
 
 export default ContentTranslation = (props) => {

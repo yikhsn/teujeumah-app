@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const StyledToggleButton = styled.TouchableOpacity`
-    flex: 2;
+    flex: 1;
 
     justify-content: center;
     align-items: center;
@@ -23,17 +23,17 @@ class ToggleButton extends Component {
         const { translateFrom, translateTo } = this.props.datas;
         
         return(
-            <View>
+            <View style={{ flex: 1 }}>
                 <StyledToggleButton
                     onPress={ () => this.onToggleHandler(translateFrom, translateTo) }
-                    >
+                >
                 <Image 
                     source={ require('../../img/double-arrow-grey.png') }
                     style={ {
                         width: 20,
                         height: 15
                     } }
-                    />
+                />
                 </StyledToggleButton>
             </View>
         )   

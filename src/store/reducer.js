@@ -1,5 +1,4 @@
 import * as actionTypes from './actionsTypes';
-import { combineReducers } from 'redux';
 
 const initialState = {
     words: '',
@@ -31,7 +30,6 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 translation: translation
             };
-
 
         case actionTypes.SET_TRANSLATION:
 

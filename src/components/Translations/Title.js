@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-
 const TitleOutputContainer = styled.View`
-    margin-bottom: 10;
-
+    margin-bottom: 5;
     flex-direction: row;
 `;
 
@@ -19,13 +17,16 @@ const TitleWord = styled.Text`
 `;
 
 export default Title = (props) => {
-
     const { titleName, words } = props;
 
     return(
         <TitleOutputContainer>
-            <TitleOutput>{titleName.toUpperCase() + ' - '}</TitleOutput>
-            <TitleWord>{words.toLowerCase()}</TitleWord>
+            <TitleOutput>
+                { titleName.toUpperCase() + ' - ' }
+            </TitleOutput>
+            <TitleWord>
+                { words.toLowerCase() }
+            </TitleWord>
         </TitleOutputContainer>
     )
 }

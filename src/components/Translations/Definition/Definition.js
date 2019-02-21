@@ -13,20 +13,20 @@ export default Definition = (props) => {
 
     return(
         <Container>
-            <Title titleName={ capitalize_words(word_type) } words={words} />
-
+            <Title 
+                titleName={ capitalize_words(word_type) }
+                words={words}
+            />
             {
                 translations.length > 0 
                     ? <Translations titleName="Arti" datas={ translations } />
                     : null 
             }
-
             {
                 synonyms.length > 0 
                     ? <Synonyms titleName="Sinonim" datas={ synonyms } />
                     : null 
             }
-
             {
                 examples.length > 0
                     ? <Examples datas={ examples } />

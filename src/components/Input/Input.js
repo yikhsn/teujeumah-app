@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components/native';
 import axios from 'axios';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../store/actionCreator';
@@ -10,6 +9,7 @@ const StyledInputContainer = styled.View`
     background-color: red;
     border-bottom-color: #eeeeee;
     border-bottom-width: 2;
+    margin-bottom: 10;
 
     /* this will be used later to add more button in input */
     /* height: 200; */
@@ -17,13 +17,10 @@ const StyledInputContainer = styled.View`
 
 const StyledTextInput = styled.TextInput`
     background-color: #ffffff;
-
     height: 180;
     text-align-vertical: top;
-
     font-size: 22;
     color: #222222;
-
     padding-left: 10;
     padding-right: 10;
 `;
@@ -65,7 +62,7 @@ class Input extends Component {
             // get the translation of each word user input
             this.getData(query)
                 .then(data => this.getTranslations(data) )
-                .catch(err => console.log('error when try to get data'));
+                .catch(err => console.log('cant get the data'));
         }
     }
 
@@ -116,7 +113,7 @@ class Input extends Component {
         }
         else this.resetData();
     }
-    
+
     render(){
         return(
             <StyledInputContainer>

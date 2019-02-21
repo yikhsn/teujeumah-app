@@ -13,7 +13,7 @@ import FooterSelect from '../components/SelectLanguage/FooterSelect';
 
 const SelectLanguageContainer = styled.View`
     background-color: #ffffff;
-    flex: 2;
+    flex: 1;
 `;
 
 const ListLanguage = styled.TouchableOpacity`
@@ -23,7 +23,7 @@ const ListLanguage = styled.TouchableOpacity`
 
 const ListText = styled.Text`
     color: #333333;
-    font-size: 15;
+    font-size: 16;
     padding-left: 30;
 
     flex-direction: row;
@@ -31,15 +31,15 @@ const ListText = styled.Text`
 `;
 
 class SelectLanguage extends Component {
-    
-    static navigationOptions = {
-        title: 'Terjemahkan dari',
+        
+    static navigationOptions = ({ navigation }) => ({
+        title: navigation.state.params.title,
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#08b586',
+                backgroundColor: '#ffffff',
             }
         }
-    }
+    })
 
     onLanguageChanged = language => {
 
@@ -64,7 +64,7 @@ class SelectLanguage extends Component {
                             return(
                                 <ListLanguage
                                     onPress={ () => this.onLanguageChanged(item.language)}
-                                    >
+                                >
                                     <ListText>
                                         {capitalize_words(item.language)}
                                     </ListText>
@@ -74,7 +74,7 @@ class SelectLanguage extends Component {
                         keyExtractor={ (item, index) => item + index }
                         ListHeaderComponent={ () => <HeaderSelect /> }
                         ListFooterComponent={ () => <FooterSelect />}
-                        />
+                    />
                 </SelectLanguageContainer>
             </ScrollView>
         )
