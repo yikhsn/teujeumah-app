@@ -15,13 +15,20 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type){
 
+        case actionTypes.TOGGLE_LANGUAGE:
+            return{
+                ...state,
+                translateFrom: state.translateTo,
+                translateTo: state.translateFrom
+            }
+
         case actionTypes.SET_WORDS:
             return {
                 ...state,
                 words: action.words
             };
 
-        case actionTypes.SET_TRANSLATIONS:
+        case actionTypes.SET_MULTIPLE_TRANSLATION:
 
             const translation = [...state.translation];
             translation.push(action.translation);

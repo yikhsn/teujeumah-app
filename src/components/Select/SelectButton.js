@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { Image, View } from 'react-native';
+import { Image } from 'react-native';
 
 const SelectButtonContainer = styled.View`
     flex: 3;
@@ -23,29 +23,33 @@ const StyledTextButton = styled.Text`
     font-weight: 500;
     color: #08b586;
     margin-right: 2;
+
+    font-family: 'Lato Black';
 `;
 
-export default SelectButton = (props) => {
-    return(
-        <SelectButtonContainer>
-            <StyledSelectButton
-                onPress={ () => props.navigation.navigate('SelectLanguage', {
-                    type: props.typeSelect,
-                    title: props.title
-                })}
-            >
-                <StyledTextButton>
-                    { props.language }
-                </StyledTextButton>
-                <Image 
-                    source={require('../../img/down-arrow-green.png')}
-                    style={{
-                        width: 11,
-                        height: 11,
-                    }}
-                />
-            </StyledSelectButton>
-        </SelectButtonContainer>
+export default class SelectButton extends Component {
+    render() {
+        return(
+            <SelectButtonContainer>
+                <StyledSelectButton
+                    onPress={ () => this.props.navigation.navigate('SelectLanguage', {
+                        type: this.props.typeSelect,
+                        title: this.props.title
+                    })}
+                >
+                    <StyledTextButton>
+                        { this.props.language }
+                    </StyledTextButton>
+                    <Image 
+                        source={require('../../img/down-arrow-green.png')}
+                        style={{
+                            width: 11,
+                            height: 11,
+                        }}
+                    />
+                </StyledSelectButton>
+            </SelectButtonContainer>
 
-    )
+        )
+    }
 }

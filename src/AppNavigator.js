@@ -12,8 +12,7 @@ const AppNavigator = createStackNavigator(
             screen: SelectLanguage,
             navigationOptions: {
                 headerTitleStyle: {
-                    fontWeight: '500',
-                    fontSize: 18
+                    fontWeight: '400'
                 },
             }
         },
@@ -28,8 +27,8 @@ const AppNavigator = createStackNavigator(
             headerTintColor: '#ffffff',
             headerTitleStyle: {
                 color: '#ffffff',
-                fontWeight: '500',
-                fontSize: 20
+                fontSize: 20,
+                fontWeight: '500'
             },
         }
     }

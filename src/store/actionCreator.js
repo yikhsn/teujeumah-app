@@ -1,5 +1,11 @@
 import * as actionTypes from './actionsTypes';
 
+export const toggleLanguage = () => {
+    return {
+        type: actionTypes.TOGGLE_LANGUAGE
+    }
+}
+
 export const setTranslateTo = language => {
     return {
         type: actionTypes.SET_TRANSLATE_TO,
@@ -28,9 +34,9 @@ export const setTranslation = translation => {
     }
 }
 
-export const setTranslations = translation => {
+export const setMultipleTranslation = translation => {
     return {
-        type: actionTypes.SET_TRANSLATIONS,
+        type: actionTypes.SET_MULTIPLE_TRANSLATION,
         translation: translation
     }
 }

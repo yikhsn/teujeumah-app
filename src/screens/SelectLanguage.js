@@ -46,9 +46,9 @@ class SelectLanguage extends Component {
         // get type changed ('setTranslateTo' or 'setTranslateFrom')
         const typeChanged = this.props.navigation.getParam('type', null);
 
-        // set language choosen based on 'typeChanged' pass by navigation
-        this.props[typeChanged](language);
 
+        if (language !== this.props[typeChanged]) this.props.toggleLanguage();
+        
         // navigate to main screen
         this.props.navigation.navigate('Main');
     };
@@ -83,7 +83,9 @@ class SelectLanguage extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.language
+        language: state.language,
+        translateFrom: state.translateFrom,
+        translateTo: state.translateTo
     }
 }
 

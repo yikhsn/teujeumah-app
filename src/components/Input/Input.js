@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../store/actionCreator';
+import { Keyboard } from 'react-native';
 
 const StyledInputContainer = styled.View`
     background-color: red;
@@ -34,11 +35,11 @@ class Input extends Component {
             this.props.setTranslation(data);
     }
 
-    getTranslations = (data) => {
+    getMultipleTranslation = (data) => {
         if ( Array.isArray(data) )
-            this.props.setTranslations(data[0].translations[0]);
+            this.props.setMultipleTranslation(data[0].translations[0]);
         else
-            this.props.setTranslations(data);
+            this.props.setMultipleTranslation(data);
     }
 
     getData = (query) => {
@@ -52,7 +53,6 @@ class Input extends Component {
 
     // function will be called if user input more than one word
     getDataMultiple = (data) => {
-        
         // split word user input into singular word and add it to an array
         const queries = data.split(' ').map( query => query.trim() );
 
@@ -61,15 +61,41 @@ class Input extends Component {
 
             // get the translation of each word user input
             this.getData(query)
-                .then(data => this.getTranslations(data) )
+                .then(data => this.getMultipleTranslation(data) )
                 .catch(err => console.log('cant get the data'));
         }
     }
 
     resetData = () => {
         this.props.setWords('');
+
         this.props.setTranslation([]);
+
         this.props.setAllData([]);
+    }
+
+    onSingleInputHandler = text => {
+        // get all data by user input
+        this.getData(text).then((data) => {
+            this.props.setTranslation([]);
+
+            this.props.setAllData([]);
+
+            // if there is a respon from the request, set the respon to state
+            if (Array.isArray(data)) this.props.setAllData(data);
+
+            // set translation by data system get
+            this.getTranslation(data);
+        });
+    }
+
+    onMultipleInputHandler = text => {
+        // this.setState({ type: [], translation: [] }); 
+        this.props.setTranslation([]);
+
+        this.props.setAllData([]);
+
+        this.getDataMultiple(text);
     }
 
     inputChangedHandler = (input) => {
@@ -79,38 +105,16 @@ class Input extends Component {
         // checking if there is user input, not a space or blank input
         if( text ){
 
-            // set the words that user input to state, fully like user input
-            // not the text was trimed
+            // add words that user input to redux, not the text was trimed
             this.props.setWords(input);
             
-            // check if user input more than word based on space between
-            // two or more word, if yes, translate input one by one word
-            if (text.includes(' ')){
-                // this.setState({ type: [], translation: [] }); 
-                this.props.setTranslation([]);
-
-                this.props.setAllData([]);
-
-                this.getDataMultiple(text);
-            }
+            // if user input more than word based on space between text
+            if (text.includes(' ')) this.onMultipleInputHandler(text);
             
             // if user only input one word
-            else{
-                // get all data by user input
-                this.getData(text).then((data) => {
-
-                    this.props.setTranslation([]);
-
-                    this.props.setAllData([]);
-
-                    // if there is a respon from the request, set the respon to state
-                    if (Array.isArray(data)) this.props.setAllData(data);
-
-                    // set translation by data system get
-                    this.getTranslation(data);
-                });
-            }
+            else this.onSingleInputHandler(text);
         }
+
         else this.resetData();
     }
 

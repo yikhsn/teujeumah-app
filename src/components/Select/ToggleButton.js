@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Animated, Easing } from 'react-native';
 import styled from 'styled-components/native';
 
-import * as setTranslateActionCreators from '../../store/actionCreator';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -14,24 +13,23 @@ const StyledToggleButton = styled.TouchableOpacity`
 `;
 
 class ToggleButton extends Component {
-    onToggleHandler = (from, to) => {
-        this.props.setTranslateTo(from);
-        this.props.setTranslateFrom(to);
-    }
-
+    
     render() {
         const { translateFrom, translateTo } = this.props.datas;
-        
+   
         return(
             <View style={{ flex: 1 }}>
                 <StyledToggleButton
-                    onPress={ () => this.onToggleHandler(translateFrom, translateTo) }
+                    onPress={ () => this.props.onToggleHandler(translateFrom, translateTo) }
                 >
-                <Image 
+                <Animated.Image 
                     source={ require('../../img/double-arrow-grey.png') }
-                    style={ {
+                    style={{
                         width: 20,
-                        height: 15
+                        height: 15,
+                        transform: [{
+                            rotate: this.props.rotateValue
+                        }]
                     } }
                 />
                 </StyledToggleButton>
@@ -46,8 +44,4 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch => (
-    bindActionCreators(setTranslateActionCreators, dispatch)
-)
-
-export default connect(mapStateToProps, mapDispatchToProps)(ToggleButton);
+export default connect(mapStateToProps)(ToggleButton);
